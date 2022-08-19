@@ -7,7 +7,7 @@ import AppContext from '../context'
 
 
 export const cutString = (text) =>{
-    const cut = text.substr(0,70)
+    const cut = text.substr(0,120)
     return cut+"..."
 }
 
@@ -18,7 +18,6 @@ const RandomRecipes = () => {
     let navigate = useNavigate()
 
     const [randomRecipes, setRandomRecipes] = useState()
-    const [mealDetail, setMealDetail] = useState()
 
     useEffect(()=>{
         fetch('https://www.themealdb.com/api/json/v1/1/search.php?apiKey=1&s=')
@@ -30,17 +29,8 @@ const RandomRecipes = () => {
     },[])
 
     const onClickRecipe = async (id) =>{
-        await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then(response => {
-            const data = response.data
-            console.log(data)
-            const {meals} = data
-            setMealDetail(meals)
-            setIdMeal(id)
-            navigate(`/recipe/${id}`)
-            
-            
-            
-        })
+        setIdMeal(id)
+        navigate(`/recipe/${id}`)
     } 
 
 

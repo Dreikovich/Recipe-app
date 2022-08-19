@@ -15,7 +15,7 @@ function App() {
 
   return (
 
-    <AppContext.Provider value={{isClickMenu,  setIsClickMenu, setIdMeal}}>
+    <AppContext.Provider value={{isClickMenu,  setIsClickMenu, idMeal, setIdMeal}}>
       <Router>
         <div className="App">
         <Header />

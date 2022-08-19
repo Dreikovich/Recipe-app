@@ -3,6 +3,7 @@ import React from 'react';
 import {Box, AppBar, Menu, MenuItem, Typography, IconButton, Toolbar} from "@mui/material"
 
 import MenuIcon from '@mui/icons-material/Menu';
+
 import {useContext} from 'react'
 import AppContext from '../context'
 
@@ -28,9 +29,8 @@ const Header = () => {
             Recipe App
           </Typography>
           
-              <Menu
-                id="menu-appbar"
-                
+              {/* <Menu
+                id="menu-appbar"      
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
@@ -40,12 +40,10 @@ const Header = () => {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-               
-                
               >
                 <MenuItem >Profile</MenuItem>
-                <MenuItem >My account</MenuItem>
-              </Menu>
+                <MenuItem >My account</MenuItem> */}
+              {/* </Menu> */}
             
           
         </Toolbar>

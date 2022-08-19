@@ -1,9 +1,12 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
-import{Box, Card, CardContent, CardMedia, Typography, CardActions, Button} from '@mui/material'
+import {useState, useEffect, useContext} from 'react'
+import{Box, Card, CardContent, CardMedia, Typography, CardActions, Button, Chip} from '@mui/material'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
+import AppContext from '../context'
 
 
-const cutString = (text) =>{
+export const cutString = (text) =>{
     const cut = text.substr(0,70)
     return cut+"..."
 }
@@ -11,8 +14,11 @@ const cutString = (text) =>{
 
 
 const RandomRecipes = () => {
+    const {setIdMeal} = useContext(AppContext)
+    let navigate = useNavigate()
 
     const [randomRecipes, setRandomRecipes] = useState()
+    const [mealDetail, setMealDetail] = useState()
 
     useEffect(()=>{
         fetch('https://www.themealdb.com/api/json/v1/1/search.php?apiKey=1&s=')
@@ -22,13 +28,28 @@ const RandomRecipes = () => {
         setRandomRecipes(data.meals)
     });
     },[])
-    console.log(randomRecipes)
+
+    const onClickRecipe = async (id) =>{
+        await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then(response => {
+            const data = response.data
+            console.log(data)
+            const {meals} = data
+            setMealDetail(meals)
+            setIdMeal(id)
+            navigate(`/recipe/${id}`)
+            
+            
+            
+        })
+    } 
 
 
     return (
         <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap"}}>
            {randomRecipes && randomRecipes.map((recipe) =>(
-              <Box maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
+            
+              <Box  key={recipe.idMeal} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
+               
                 <Card>
                     <CardMedia 
                     component="img"
@@ -46,8 +67,24 @@ const RandomRecipes = () => {
 
                     </CardContent>
                     <CardActions>
-                        <Button size="small">See more...</Button>
+                        <Button size="small" onClick={()=>onClickRecipe(recipe.idMeal)}>See more...</Button>
+                        
                     </CardActions>
+                    <div style={{marginLeft: "10px", display: "flex", flexWrap:"wrap"}}>
+                        <Chip style={{marginRight:"5px", marginBottom:"5px"}} label={recipe.strCategory}></Chip>
+                        <Chip style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
+                    
+                        {recipe.strTags!==null? recipe.strTags.split(",").map(element=>(
+                            <Chip style={{marginRight:"5px", marginBottom:"10px"}} label={element}></Chip>
+                        )):null
+                        }
+                        <br/>
+                    </div>
+                    
+                       
+                       
+                    
+                    
 
                 </Card>
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
+import Counter from "./Counter"
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
 import {useParams} from 'react-router-dom'
 
@@ -11,6 +12,7 @@ import axios from "axios"
 const Recipe = () => {
     
     const [mealDetail, setMealDetail] = useState()
+    const [measure, setMeasure] = useState()
     const { id } = useParams()
     
 
@@ -25,6 +27,11 @@ const Recipe = () => {
         return arrayIngredients
     }
 
+    const getMeasures = ()=>{
+        const arrayMeasures = findContent(mealDetail, 'strMeasure')
+        console.log(arrayMeasures)
+    }
+    if(mealDetail){getMeasures()}
     
     useEffect(() =>{
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${id}`).then(res=>{
@@ -32,6 +39,7 @@ const Recipe = () => {
             const {meals} = data
             setMealDetail(meals[0])
         })
+        
     },[])
     
     
@@ -58,7 +66,7 @@ const Recipe = () => {
                             <Chip style={{marginRight:"5px"}} label={mealDetail.strArea}></Chip>
                         
                             {mealDetail.strTags!==null? mealDetail.strTags.split(",").map(element=>(
-                                <Chip style={{marginRight:"5px", marginBottom:"10px"}} label={element}></Chip>
+                                <Chip  color="primary" variant="outlined"  style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
                             )):null
                             }
                             <br/>
@@ -79,6 +87,7 @@ const Recipe = () => {
                                 <Box component="div"  sx={{ display:"flex", marginTop:"20px"}}>
                                     <Box>
                                     {findContent(mealDetail,"strIngredient").map((element,index)=>(
+                                        
                                         <ListItemText id={index} primary={element}/>
                                     ))}
                                     </Box>
@@ -90,6 +99,7 @@ const Recipe = () => {
                                 </Box>
                             </CardContent>
                         </Card>
+                        <Counter />
                         
                     </div>
 

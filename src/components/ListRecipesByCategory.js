@@ -8,6 +8,7 @@ const ListRecipesByCategory = () => {
     const [recipesByCategory, setRecipesByCategory] = useState()
     const { category } = useParams()
     const getData = async()=>{
+      
         await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`).then(res=>{
             const data = res.data
             const {meals} = data
@@ -22,7 +23,7 @@ const ListRecipesByCategory = () => {
 
     console.log(recipesByCategory)
   return (
-    <CardRowCategory recipesByCategory={recipesByCategory}/>
+    <CardRowCategory recipes={recipesByCategory}/>
   )
 }
 

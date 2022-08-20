@@ -35,11 +35,20 @@ const RandomRecipes = () => {
         navigate(`/categories/${search}`)
         
     }
+
+    const onClickChipArea =(search) =>{
+        console.log(search)
+        navigate(`/countries/${search}`)
+    }
     
 
-    const onClickRecipe = async (id) =>{
+    const onClickRecipe = (id) =>{
         navigate(`/recipe/${id}`)
     } 
+
+    const onClickChipTag = (search)=>{
+        navigate(`/tags/${search}`)
+    }
 
 
     return (
@@ -65,14 +74,14 @@ const RandomRecipes = () => {
                     </CardActions>
                     <Box style={{marginLeft: "10px", display: "flex", flexWrap:"wrap"}}>
                         <Chip onClick={()=>onClickChipCategory(recipe.strCategory)} style={{marginRight:"5px", marginBottom:"5px"}} label={recipe.strCategory}></Chip>
-                        <Chip style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
+                        <Chip onClick={()=>onClickChipArea(recipe.strArea)} style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
                     
                         {recipe.strTags!==null? recipe.strTags.split(",").map(element=>(
-                            <Chip style={{marginRight:"5px", marginBottom:"10px"}} label={element}></Chip>
+                            <Chip color="primary" variant="outlined" style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
                         )):null
                         }
-                        <br/>
-                    </Box>
+                        
+                    </Box> 
                 </Card>
               </Box> 
             ))

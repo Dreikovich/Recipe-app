@@ -16,7 +16,7 @@ const Img = styled('img')({
     maxHeight: '180px',
   });
 
-const CardRowCategory = ({recipesByCategory}) => {
+const CardRowCategory = ({recipes}) => {
 
 
     // const getFullInfoAboutMeal = (id)=>{
@@ -37,7 +37,7 @@ const CardRowCategory = ({recipesByCategory}) => {
 
     return (
     <Box>
-      {recipesByCategory && recipesByCategory.map(element =>(
+      {recipes && recipes.map(element =>(
           
           <Paper  key={element.idMeal}
           

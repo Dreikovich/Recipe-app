@@ -6,6 +6,7 @@ import DrawerMenu from './components/DrawerMenu'
 import Categories from './pages/Categories'
 import Recipe from "./components/Recipe"
 import ListRecipesByCategory from './components/ListRecipesByCategory'
+import ListRecipesByCountries from './components/ListRecipesByCountry'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Countries from './pages/Countries';
 
@@ -29,6 +30,8 @@ function App() {
             {/* <Route path={`/categories/${urlCategory}`} element={<ListRecipesByCategory urlCategory={urlCategory} />}></Route> */}
             <Route path={`/categories/:category`} element={<ListRecipesByCategory />}></Route>
             <Route path={`/countries`} element={<Countries />}></Route>
+            <Route path={`/countries/:country`} element={<ListRecipesByCountries />}></Route>
+            <Route path={`/tags/:tag`} element={<ListRecipesByCountries />}></Route>
 
             
           </Routes>

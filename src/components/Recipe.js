@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+
 
 import AppContext from "../context"
 import axios from "axios"
@@ -38,7 +38,6 @@ const Recipe = () => {
     return (
         (mealDetail && 
             <Box >
-                
                 <div className="container" style={{display: 'flex', justifyContent: 'center'}}>  
                     <div className="leftContainer" style={{width:"650px"}}>
                         <Box sx={{ marginBottom:"10px", position:"relative"}}>

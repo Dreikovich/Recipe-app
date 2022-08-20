@@ -43,7 +43,7 @@ const Category = () => {
                     </Typography>
                     
                     <Typography variant="body2" color="text.secondary">
-                        {cutString(element.strCategoryDescription)}
+                        {cutString(element.strCategoryDescription, 140)}
                     </Typography>
 
                 </CardContent>

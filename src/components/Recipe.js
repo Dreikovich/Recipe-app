@@ -1,17 +1,17 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
+import {useParams} from 'react-router-dom'
 
 
-import AppContext from "../context"
 import axios from "axios"
 
 
 
 const Recipe = () => {
     
-    const {idMeal} = useContext(AppContext)
     const [mealDetail, setMealDetail] = useState()
+    const { id } = useParams()
     
 
 
@@ -27,7 +27,7 @@ const Recipe = () => {
 
     
     useEffect(() =>{
-        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${idMeal}`).then(res=>{
+        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${id}`).then(res=>{
             const data = res.data
             const {meals} = data
             setMealDetail(meals[0])

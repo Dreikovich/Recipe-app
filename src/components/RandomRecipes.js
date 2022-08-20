@@ -15,7 +15,7 @@ export const cutString = (text, count) =>{
 
 
 const RandomRecipes = () => {
-    const {setIdMeal, setUrlCategory} = useContext(AppContext)
+    const {} = useContext(AppContext)
     let navigate = useNavigate()
 
     const [randomRecipes, setRandomRecipes] = useState()
@@ -32,14 +32,12 @@ const RandomRecipes = () => {
 
     const onClickChipCategory = async (search)=>{
         await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`).then(res=>console.log(res.data))
-        setUrlCategory(search)
         navigate(`/categories/${search}`)
         
     }
     
 
     const onClickRecipe = async (id) =>{
-        setIdMeal(id)
         navigate(`/recipe/${id}`)
     } 
 
@@ -47,9 +45,7 @@ const RandomRecipes = () => {
     return (
         <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap"}}>
            {randomRecipes && randomRecipes.map((recipe) =>(
-            
               <Box  key={recipe.idMeal} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
-               
                 <Card>
                     <CardMedia 
                     component="img"
@@ -67,7 +63,7 @@ const RandomRecipes = () => {
                     <CardActions>
                         <Button size="small" onClick={()=>onClickRecipe(recipe.idMeal)}>See more...</Button>
                     </CardActions>
-                    <div style={{marginLeft: "10px", display: "flex", flexWrap:"wrap"}}>
+                    <Box style={{marginLeft: "10px", display: "flex", flexWrap:"wrap"}}>
                         <Chip onClick={()=>onClickChipCategory(recipe.strCategory)} style={{marginRight:"5px", marginBottom:"5px"}} label={recipe.strCategory}></Chip>
                         <Chip style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
                     
@@ -76,7 +72,7 @@ const RandomRecipes = () => {
                         )):null
                         }
                         <br/>
-                    </div>
+                    </Box>
                 </Card>
               </Box> 
             ))

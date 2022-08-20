@@ -3,6 +3,8 @@ import {useEffect} from 'react'
 import {useState} from 'react'
 import axios from 'axios'
 import {cutString} from '../components/RandomRecipes'
+import {Link} from "react-router-dom"
+
 
 import{Box, Card, CardContent, CardMedia, Typography, CardActions, Button} from '@mui/material'
 
@@ -10,6 +12,7 @@ import{Box, Card, CardContent, CardMedia, Typography, CardActions, Button} from 
 
 const Category = () => {
     const [category, setCategory] = useState()
+    
 
     const getCategoryList = async () =>{
         await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php?apiKey=1").
@@ -30,27 +33,26 @@ const Category = () => {
     <div style={{display:"flex", justifyContent:"center",flexWrap: "wrap"}}>
         {category && category.map(element => (
             <Box  key={element.idCategory} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
-               
-            <Card>
-                <CardMedia 
-                component="img"
-                height="200px"
-                image={element.strCategoryThumb}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {element.strCategory}
-                    </Typography>
-                    
-                    <Typography variant="body2" color="text.secondary">
-                        {cutString(element.strCategoryDescription, 140)}
-                    </Typography>
+                <Link to={`/categories/${element.strCategory}`} style={{textDecoration:"none"}}>
+                    <Card >
+                        <CardMedia 
+                        component="img"
+                        height="200px"
+                        image={element.strCategoryThumb}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {element.strCategory}
+                            </Typography>
+                            
+                            <Typography variant="body2" color="text.secondary">
+                                {cutString(element.strCategoryDescription, 140)}
+                            </Typography>
 
-                </CardContent>
-                
-
-            </Card>
-
+                        </CardContent>
+                    </Card>
+                </Link>
+            
           </Box> 
         ))}
     </div>

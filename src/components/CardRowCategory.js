@@ -28,15 +28,13 @@ const CardRowCategory = ({recipesByCategory}) => {
         
     //   })
     // }
-    const {setIdMeal} = useContext(AppContext)
     let navigate = useNavigate()
 
 
     const onShowRecipe = (id)=>{
-      setIdMeal(id)
       navigate(`/recipe/${id}`)
     }
-    
+
     return (
     <Box>
       {recipesByCategory && recipesByCategory.map(element =>(

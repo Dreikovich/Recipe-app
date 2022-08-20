@@ -11,6 +11,7 @@ const DrawerMenu = () => {
   const itemList  = [
     {name:"Home", onClick: () =>navigate("/", { replace: true })},
     {name:"Categories", onClick: () =>navigate("/categories", { replace: true })},
+    {name:"Countries", onClick: () =>navigate("/countries", { replace: true })},
     // {name:"Countries", onClick: () =>navigate("countries")},
     // {name:"Settings", onClick: () =>navigate("settings")}
     

@@ -11,12 +11,10 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 function App() {
 
   const [isClickMenu, setIsClickMenu] = useState(false)
-  const [idMeal, setIdMeal] = useState()
-  const [urlCategory, setUrlCategory] = useState()
 
   return (
 
-    <AppContext.Provider value={{isClickMenu,  setIsClickMenu, idMeal, setIdMeal, setUrlCategory}}>
+    <AppContext.Provider value={{isClickMenu,  setIsClickMenu}}>
       <Router>
         <div className="App">
         <Header />
@@ -26,8 +24,10 @@ function App() {
             
             <Route path="/" element={<RandomRecipes />}></Route>
             <Route path="/categories" element={<Categories />}></Route>
-            <Route path={`/recipe/${idMeal}`} element={<Recipe />}></Route>
-            <Route path={`/categories/${urlCategory}`} element={<ListRecipesByCategory urlCategory={urlCategory} />}></Route>
+            <Route path={`/recipe/:id`} element={<Recipe />}></Route>
+            {/* <Route path={`/categories/${urlCategory}`} element={<ListRecipesByCategory urlCategory={urlCategory} />}></Route> */}
+            <Route path={`/categories/:category`} element={<ListRecipesByCategory />}></Route>
+
             
           </Routes>
           

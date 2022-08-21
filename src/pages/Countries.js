@@ -4,24 +4,48 @@ import axios from 'axios'
 import {Box, Card, CardContent,CardMedia, Typography} from "@mui/material"
 import {useNavigate} from "react-router-dom"
 
+
+
 const Countries = () => {
 
     const [countries, setCountries] = useState()
     let navigate = useNavigate()
    
+    //! method random
+    // Array.prototype.random = function () {
+    //     return this[Math.floor((Math.random()*this.length))];
+    // }
+   
+    //********** function for pexels api
+    // const getImagesFromApi = async (query)=>{
+    //     try{
+    //         const res = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=1`,{
+    //         headers: {
+    //             "Authorization": "563492ad6f91700001000001070cc20509c34c398a2ae176d97c2503",
+                
+    //         }})
+    //         const data = res.data
+    //         const { photos } = data
+            
+    //         return photos[0].src.small
+    //     }
+    //     catch(err){
+    //         console.log(err.message)
+    //     }
+    // }
 
-    Array.prototype.random = function () {
-        return this[Math.floor((Math.random()*this.length))];
+    const getImagesFromApi = async (query) =>{
+        try{
+            const res = await axios.get(`https://pixabay.com/api/?key=29412461-234e7bb3280c2c60ab6aa5601&q=${query}+flag`)
+            const data = res.data
+            const { hits } = data
+            return hits[0].webformatURL
+        }
+        catch(err){
+            console.log(err)
+        }
     }
-
-    const getImagesFromApi = async (query)=>{
-        
-        const res = await axios.get(`https://api.pexels.com/v1/search?apiKey=563492ad6f91700001000001070cc20509c34c398a2ae176d97c2503&query=${query}`)
-        const data = res.data
-        const { photos } = data
-        
-        return photos[1].src.medium
-    }
+    
   
     const onClickCard=(value)=>{
         navigate(`/countries/${value}`)
@@ -42,7 +66,7 @@ const Countries = () => {
             console.log(meals)
             setCountries(meals)
         })
-        // getImagesFromApi("America")
+        
     },[])
     
 
@@ -51,12 +75,12 @@ const Countries = () => {
             {countries && countries.map(country => (
                 <Card style={{cursor: 'pointer',display:"flex", alignItems: 'center', justifyContent:'center', flexDirection: 'column'}} 
                         variant="outlined" 
-                        sx={{ width: 250, height:200, margin:3}} 
+                        sx={{ width: 250, height:220, margin:3}} 
                         onClick={()=>onClickCard(country.strArea)}>
-                    <CardContent >
-                        <Typography>{country.strArea}</Typography>
-                    </CardContent>
-                    <img width={250} height={150}src={country.imageUrl} alt="country" />
+                    <CardContent style={{width:"100%", borderBottom: "2px solid #e9e9e9" ,backgroundColor:"#e9e9e9"}}>
+                        <Typography >{country.strArea}</Typography>
+                    </CardContent >
+                    <img  width={250} height={170} src={country.imageUrl} alt="country" />
                 </Card>
             ))}
 

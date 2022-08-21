@@ -46,9 +46,9 @@ const RandomRecipes = () => {
         navigate(`/recipe/${id}`)
     } 
 
-    const onClickChipTag = (search)=>{
-        navigate(`/tags/${search}`)
-    }
+    // const onClickChipTag = (search)=>{
+    //     navigate(`/tags/${search}`)
+    // }
 
 
     return (

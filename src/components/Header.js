@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import {useContext} from 'react'
 import AppContext from '../context'
+import SearchBarComponent from './SearchBar';
 
 const Header = () => {
 
@@ -28,6 +29,7 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Recipe App
           </Typography>
+          <SearchBarComponent />
           
               {/* <Menu
                 id="menu-appbar"      

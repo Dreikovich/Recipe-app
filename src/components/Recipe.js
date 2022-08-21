@@ -1,23 +1,22 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
 import Counter from "./Counter"
+import RecommendedRecipe from './RecommendedRecipe'
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
 import {useParams} from 'react-router-dom'
 
 
+
 import axios from "axios"
-
-
 
 const Recipe = () => {
     
     const [mealDetail, setMealDetail] = useState()
     const [measure, setMeasure] = useState()
     const { id } = useParams()
+   
     
-
-
-    
+    console.log(id)
     const findContent = (meal, search) =>{
         const arrayMeal = Object.entries(meal)
         //***mid level desctructurization
@@ -39,15 +38,16 @@ const Recipe = () => {
             const {meals} = data
             setMealDetail(meals[0])
         })
+        window.scrollTo(0, 0);
         
-    },[])
+    },[id])
     
     
     return (
         (mealDetail && 
             <Box >
                 <div className="container" style={{display: 'flex', justifyContent: 'center'}}>  
-                    <div className="leftContainer" style={{width:"650px"}}>
+                    <div className="leftContainer" style={{width:"800px"}}>
                         <Box sx={{ marginBottom:"10px", position:"relative"}}>
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
@@ -55,7 +55,7 @@ const Recipe = () => {
                             component="img"
                             sx={{
                             height: 550,
-                            width: 650,
+                            width: 800,
                             }}
                             alt="ImageRecipe"
                             src={mealDetail.strMealThumb}
@@ -76,6 +76,10 @@ const Recipe = () => {
                             }}>
                             <Typography variant='h4'>Descriprions</Typography>
                             <Typography>{mealDetail.strInstructions}</Typography>
+                        </Box>
+                        <Box sx={{marginTop:"30px"}}>
+                            <Typography variant='h4'>Related Recipes</Typography>
+                            <RecommendedRecipe mealDetail={mealDetail}/>
                         </Box>
                       
                 

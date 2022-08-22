@@ -1,6 +1,5 @@
 import React from 'react'
 import {useState, useEffect, useContext} from "react"
-import Counter from "./Counter"
 import RecommendedRecipe from './RecommendedRecipe'
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
 import {useParams} from 'react-router-dom'
@@ -15,8 +14,7 @@ const Recipe = () => {
     const [measure, setMeasure] = useState()
     const { id } = useParams()
    
-    
-    console.log(id)
+
     const findContent = (meal, search) =>{
         const arrayMeal = Object.entries(meal)
         //***mid level desctructurization
@@ -26,11 +24,11 @@ const Recipe = () => {
         return arrayIngredients
     }
 
-    const getMeasures = ()=>{
-        const arrayMeasures = findContent(mealDetail, 'strMeasure')
-        console.log(arrayMeasures)
-    }
-    if(mealDetail){getMeasures()}
+    // const getMeasures = ()=>{
+    //     const arrayMeasures = findContent(mealDetail, 'strMeasure')
+    //     console.log(arrayMeasures)
+    // }
+    // if(mealDetail){getMeasures()}
     
     useEffect(() =>{
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${id}`).then(res=>{
@@ -92,18 +90,18 @@ const Recipe = () => {
                                     <Box>
                                     {findContent(mealDetail,"strIngredient").map((element,index)=>(
                                         
-                                        <ListItemText id={index} primary={element}/>
+                                        <ListItemText key={index} id={index} primary={element}/>
                                     ))}
                                     </Box>
                                     <Box sx={{marginLeft:"50px"}} >
                                     {findContent(mealDetail,"strMeasure").map((element,index)=>(
-                                        <ListItemText id={index} primary={element}></ListItemText>
+                                        <ListItemText key={index} id={index} primary={element}></ListItemText>
                                     ))}
                                     </Box>
                                 </Box>
                             </CardContent>
                         </Card>
-                        <Counter />
+                        
                         
                     </div>
 

@@ -23,11 +23,11 @@ const SearchResults = () => {
         getData()
     },[searchValue])
 
-    console.log(recipe)
+    
   return (
     <div>
         
-        {recipe? <CardRowCategory recipes={recipe}/>: <h1>No recipes found by request {searchValue}</h1>}
+        {recipe!=null? <CardRowCategory recipes={recipe}/>: <h1>No recipes found by request {searchValue}</h1>}
     </div>
     
   )

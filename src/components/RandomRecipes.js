@@ -76,8 +76,8 @@ const RandomRecipes = () => {
                         <Chip onClick={()=>onClickChipCategory(recipe.strCategory)} style={{marginRight:"5px", marginBottom:"5px"}} label={recipe.strCategory}></Chip>
                         <Chip onClick={()=>onClickChipArea(recipe.strArea)} style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
                     
-                        {recipe.strTags!==null? recipe.strTags.split(",").map(element=>(
-                            <Chip color="primary" variant="outlined" style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
+                        {recipe.strTags!==null? recipe.strTags.split(",").map((element, index)=>(
+                            <Chip key={element} color="primary" variant="outlined" style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
                         )):null
                         }
                         

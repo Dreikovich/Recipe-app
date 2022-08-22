@@ -29,8 +29,7 @@ const RecommendedRecipe = ({mealDetail}) => {
         return filteredRecipes[0]
 
     }
-    
-    console.log(mealDetail.idMeal)
+
 
     const getSixRandomRecipes = () =>{
         let randomSix = []
@@ -41,7 +40,6 @@ const RecommendedRecipe = ({mealDetail}) => {
                 randomSix = [...randomSix, recipes.random()]
                     const countItems = randomSix.reduce((acc, {idMeal}) => {
                         if(idMeal!==mealDetail.idMeal){
-                            console.log("chcbh")
                             acc[idMeal] = acc[idMeal] ? acc[idMeal] + 1 : 1;
                             return acc;
                         }
@@ -63,7 +61,6 @@ const RecommendedRecipe = ({mealDetail}) => {
 
 
     const onShowRecipe = (id) =>{
-        console.log(id)
         navigate(`/recipe/${id}`)
     }
 
@@ -76,8 +73,8 @@ const RecommendedRecipe = ({mealDetail}) => {
     },[])
     return (
         <Box sx={{display: 'flex', flexWrap:"wrap", gap:"22px",marginTop:"15px"}}>
-            {relatedReciipes && relatedReciipes.map(element =>(
-                <Card  sx={{ maxWidth: 240, maxHeight:420, position:"relative" }}>
+            {relatedReciipes && relatedReciipes.map((element, index) =>(
+                <Card key={index} sx={{ maxWidth: 240, maxHeight:420, position:"relative" }}>
                     <CardMedia
                         component="img"
                         alt="green iguana"

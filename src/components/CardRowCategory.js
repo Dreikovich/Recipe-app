@@ -18,16 +18,6 @@ const Img = styled('img')({
 
 const CardRowCategory = ({recipes}) => {
 
-
-    // const getFullInfoAboutMeal = (id)=>{
-    //   console.log(id)
-    //   axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then(res=>{
-    //     const data = res.data;
-    //     const {meals} = data
-    //     setMealInfo([...mealInfo, meals])
-        
-    //   })
-    // }
     let navigate = useNavigate()
 
 
@@ -37,22 +27,16 @@ const CardRowCategory = ({recipes}) => {
 
     return (
     <Box>
-      {recipes && recipes.map(element =>(
-          
+      {recipes && recipes.map(element =>(  
           <Paper  key={element.idMeal}
-          
             sx={{
               p: 2,
               margin: 'auto',
               maxWidth: 800,
               flexGrow: 1,
               marginBottom: '20px'
-              // backgroundColor: (theme) =>
-              //   theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
             }}
-          >
-           
-            
+          >  
             <Grid container spacing={2}>
               <Grid item>
                   <Img alt="complex" src={element.strMealThumb} />
@@ -64,7 +48,7 @@ const CardRowCategory = ({recipes}) => {
                     <Typography variant="h4">{element.strMeal}</Typography>
                   </Grid>
                   <Grid item >
-                    <Description id = {element.idMeal}/>
+                    <Description id = {element.idMeal} count = {300}/>
                   </Grid>
                   <Grid item>
                     <Button onClick={()=>onShowRecipe(element.idMeal)}>Show Recipe</Button>

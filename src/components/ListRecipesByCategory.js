@@ -5,6 +5,7 @@ import axios from "axios"
 import {useParams} from 'react-router-dom'
 
 const ListRecipesByCategory = () => {
+
     const [recipesByCategory, setRecipesByCategory] = useState()
     const { category } = useParams()
     const getData = async()=>{
@@ -21,7 +22,6 @@ const ListRecipesByCategory = () => {
 
     },[])
 
-    console.log(recipesByCategory)
   return (
     <CardRowCategory recipes={recipesByCategory}/>
   )

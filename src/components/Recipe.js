@@ -65,8 +65,8 @@ const Recipe = () => {
                             <Chip style={{marginRight:"5px", marginBottom:"5px"}} label={mealDetail.strCategory}></Chip>
                             <Chip style={{marginRight:"5px"}} label={mealDetail.strArea}></Chip>
                         
-                            {mealDetail.strTags!==null? mealDetail.strTags.split(",").map(element=>(
-                                <Chip  color="primary" variant="outlined"  style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
+                            {mealDetail.strTags!==null? mealDetail.strTags.split(",").map((element, index)=>(
+                                <Chip key={index} color="primary" variant="outlined"  style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
                             )):null
                             }
                             <br/>

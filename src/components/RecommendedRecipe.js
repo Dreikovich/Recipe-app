@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Box, Card, CardMedia, CardActions, CardContent, Button, Typography} from '@mui/material'
 import {useNavigate} from 'react-router-dom'
-import {useRef} from 'react-router-dom' 
+import Description from './Description'
+
  
 const RecommendedRecipe = ({mealDetail}) => {
     let navigate = useNavigate()
@@ -23,19 +24,43 @@ const RecommendedRecipe = ({mealDetail}) => {
         }  
     }
 
+    const searchObj = (id)=>{
+        const filteredRecipes = recipes.filter(({idMeal})=> id===idMeal )
+        return filteredRecipes[0]
+
+    }
+    
+    console.log(mealDetail.idMeal)
+
     const getSixRandomRecipes = () =>{
         let randomSix = []
-        if(recipes){
-            for(let i=0;i<6;i++){
+        let result = []
+        let recommended = []
+        if(recipes && mealDetail){
+               while(result.length!==6){
                 randomSix = [...randomSix, recipes.random()]
-            }
-            return randomSix
+                    const countItems = randomSix.reduce((acc, {idMeal}) => {
+                        if(idMeal!==mealDetail.idMeal){
+                            console.log("chcbh")
+                            acc[idMeal] = acc[idMeal] ? acc[idMeal] + 1 : 1;
+                            return acc;
+                        }
+                        else {
+                            return {}
+                        } 
+                    }, {});
+                    result = Object.keys(countItems).filter((item) => countItems[item] = 1)
+
+               }
+               result.map((id) => {
+                    recommended = [...recommended, searchObj(id)]
+               })
+               return recommended   
         }
         else return null
         
     }
 
-    console.log(recipes)
 
     const onShowRecipe = (id) =>{
         console.log(id)
@@ -43,8 +68,6 @@ const RecommendedRecipe = ({mealDetail}) => {
     }
 
     const relatedReciipes = getSixRandomRecipes() 
-    
-    
 
     useEffect(() =>{
         
@@ -54,7 +77,7 @@ const RecommendedRecipe = ({mealDetail}) => {
     return (
         <Box sx={{display: 'flex', flexWrap:"wrap", gap:"22px",marginTop:"15px"}}>
             {relatedReciipes && relatedReciipes.map(element =>(
-                <Card  sx={{ maxWidth: 240, maxHeight:400, position:"relative" }}>
+                <Card  sx={{ maxWidth: 240, maxHeight:420, position:"relative" }}>
                     <CardMedia
                         component="img"
                         alt="green iguana"
@@ -65,10 +88,7 @@ const RecommendedRecipe = ({mealDetail}) => {
                         <Typography gutterBottom variant="h5" component="div">
                             {element.strMeal}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
-                        </Typography>
+                        <Description id = {element.idMeal} count={50}/>
                     </CardContent>
                     <CardActions >
                         <Button style={{position: 'absolute', bottom: '0px'}} onClick={()=>onShowRecipe(element.idMeal)} size="small">Show ...</Button>

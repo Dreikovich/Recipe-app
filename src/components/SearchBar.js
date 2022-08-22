@@ -8,6 +8,7 @@ import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton'
 import ListSubheader from '@mui/material/ListSubheader'
+import {useNavigate} from 'react-router-dom'
 
 
 import React from 'react'
@@ -15,11 +16,10 @@ import axios from "axios";
 
 const SearchBar = () => {
 
-   
-
+    let navigate = useNavigate()
     const [searchValue, setSearchValue] = useState()
     const [recipe, setRecipe] = useState()
-    const [open, setOpen] = useState(false)
+    const [close, setClose] = useState(false)
 
     const get = async ()=>{
         const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`)
@@ -30,20 +30,25 @@ const SearchBar = () => {
         }
         else{
             setRecipe(null)
-        }
-        
-        
+        } 
     }
-    console.log(recipe)
 
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        navigate(`/search/${searchValue}`)
+    }
+   
     const onInputChange = (e) =>{
-        setSearchValue(e.target.value)
-        
-        
+        setSearchValue(e.target.value)    
+        setClose(false)
     }
-    console.log(recipe)
-    
 
+    const onClickItem = (id, name) =>{
+        setSearchValue(name)
+        setClose(true)
+        navigate(`/recipe/${id}`)
+    }
+    
     useEffect(() => {
         get()
 
@@ -51,28 +56,27 @@ const SearchBar = () => {
 
     return (
     
-        <form style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
-            
-                <input style={{height:"30px",width:"200px"}} type="text" placeholder="Search.." name="search" onChange={(e)=>onInputChange(e)}/>
+        <form style={{display: 'flex', alignItems: 'center', position: 'relative'}} onSubmit={onSubmit}>
+                <input value={searchValue} style={{height:"30px",width:"200px"}} type="text" placeholder="Search.." name="search" onChange={(e)=>onInputChange(e)}/>
                 <SearchIcon />
-                
-            
-                <List sx={{display:"flex", flexDirection:"column", justifyContent: "center", 
-                                position: 'absolute', top: '0', marginTop: '42px',
-                                 backgroundColor:"white",
-                                 overflow: 'auto',
-                                 maxHeight: 300,
-                                }}
-                                subheader={searchValue && recipe!==null?<ListSubheader>Search Results</ListSubheader>:null}>
+                {!close && 
+                    <List sx={{display:"flex", flexDirection:"column",  
+                        position: 'absolute', top: '0', marginTop: '42px',
+                        backgroundColor:"white",
+                        overflow: 'auto',
+                        maxHeight: 300,
+                    }}
+                    subheader={searchValue && recipe!==null?<ListSubheader>Search Results</ListSubheader>:null}>
                     {searchValue && recipe && recipe.map((value)=>(
-                        <ListItemButton style={{ width:"200px", marginTop:"5px", position: "relative" }}>
+                        <ListItemButton onClick={()=>onClickItem(value.idMeal, value.strMeal)} style={{ width:"200px", position: "relative" }}>
                             <ListItemText style={{color:"black"}}primary={value.strMeal}/> 
                         </ListItemButton>
-                        
                         )
                         
                     )}
                 </List>
+                }
+                
             
         </form>
     );

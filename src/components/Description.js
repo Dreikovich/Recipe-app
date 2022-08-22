@@ -4,7 +4,8 @@ import {Typography} from '@mui/material'
 import axios from 'axios'
 import {cutString} from './RandomRecipes'
 
-const Description = ({id}) => {
+const Description = ({id, count}) => {
+    
     const [mealInfo, setMealInfo] =  useState()
 
     const getData = async () =>{
@@ -12,19 +13,17 @@ const Description = ({id}) => {
             const data = response.data
             const {meals} = data;
             setMealInfo(meals)
-
         })
     }
-    
 
     useEffect(() =>{
         getData()
     },[id])
 
-    console.log()
+
   return (
     <div>
-        {mealInfo && <Typography>{cutString(mealInfo[0].strInstructions, 300)}</Typography>}
+        {mealInfo && <Typography>{cutString(mealInfo[0].strInstructions, count)}</Typography>}
         
     </div>
   )

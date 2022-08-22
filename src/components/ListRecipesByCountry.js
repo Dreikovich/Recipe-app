@@ -7,6 +7,7 @@ import {useParams} from 'react-router-dom'
 
 
 const ListRecipesByCountry = () => {
+    
     const [recipesByCountries, setRecipesByCountries] = useState()
     const { country  } = useParams()
     console.log(country)
@@ -23,7 +24,6 @@ const ListRecipesByCountry = () => {
         getData()
     },[])
 
-    console.log(recipesByCountries)
   return (
     <div>
         <CardRowCategory recipes ={recipesByCountries}/>

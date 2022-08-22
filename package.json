@@ -21,6 +21,10 @@
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
+  "engines": {
+    "node": "v16.5.0",
+    "npm": "8.1.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -45,10 +49,7 @@
       "last 1 safari version"
     ]
   },
-  "engines": {
-    "node": "v16.5.0",
-    "npm": "8.1.4"
-  },git add .
+  
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {},
@@ -62,6 +63,6 @@
   "bugs": {
     "url": "https://github.com/drewkevich/Recipe-app/issues"
   },
-  "homepage": "https://github.com/drewkevich/Recipe-app#readme",
+  "homepage": "https://github.com/drewkevich/Recipe-app#readme"
   
 }

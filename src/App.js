@@ -25,7 +25,7 @@ function App() {
           <DrawerMenu />
           <Routes>
             
-            <Route path="/" element={<RandomRecipes />}></Route>
+            <Route path="Recipe-app" element={<RandomRecipes />}></Route>
             <Route path="/categories" element={<Categories />}></Route>
             <Route path={`/recipe/:id`} element={<Recipe />}></Route>
             {/* <Route path={`/categories/${urlCategory}`} element={<ListRecipesByCategory urlCategory={urlCategory} />}></Route> */}

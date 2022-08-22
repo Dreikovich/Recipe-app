@@ -71,7 +71,7 @@ const Countries = () => {
     
 
   return (
-    <Box sx={{display: 'flex', flexWrap:"wrap"}}>
+    <Box sx={{display: 'flex', flexWrap:"wrap", justifyContent:"center"}}>
             {countries && countries.map(country => (
                 <Card style={{cursor: 'pointer',display:"flex", alignItems: 'center', justifyContent:'center', flexDirection: 'column'}} 
                         variant="outlined" 

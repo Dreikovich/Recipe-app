@@ -52,10 +52,10 @@ const RandomRecipes = () => {
 
 
     return (
-        <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap"}}>
+        <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap", gap:"25px"}}>
            {randomRecipes && randomRecipes.map((recipe) =>(
-              <Box  key={recipe.idMeal} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
-                <Card>
+              <Box style={{display: "flex", justifyContent:"center"}}  key={recipe.idMeal} maxWidth='400px'>
+                <Card >
                     <CardMedia 
                     component="img"
                     height="150px"

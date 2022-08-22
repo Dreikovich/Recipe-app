@@ -44,16 +44,16 @@ const Recipe = () => {
     return (
         (mealDetail && 
             <Box >
-                <div className="container" style={{display: 'flex', justifyContent: 'center'}}>  
-                    <div className="leftContainer" style={{width:"800px"}}>
-                        <Box sx={{ marginBottom:"10px", position:"relative"}}>
+                <Box className="container" sx={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}} >  
+                    <Box className="leftContainer" style={{display:"flex", justifyContent: 'center', flexDirection: 'column', width: '800px'}}>
+                        <Box sx={{ marginBottom:"10px"}}>
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
                         <Box
                             component="img"
                             sx={{
-                            height: 550,
-                            width: 800,
+                            maxHeight: 550,
+                            maxWidth: '100%'
                             }}
                             alt="ImageRecipe"
                             src={mealDetail.strMealThumb}
@@ -77,13 +77,16 @@ const Recipe = () => {
                         </Box>
                         <Box sx={{marginTop:"30px"}}>
                             <Typography variant='h4'>Related Recipes</Typography>
+                           
                             <RecommendedRecipe mealDetail={mealDetail}/>
+                         
+                            
                         </Box>
                       
                 
-                    </div>
-                    <div style={{marginLeft:"40px", marginTop:"81px"}} className="RightContainer">
-                        <Card>
+                    </Box>
+                    <Box style={{ marginLeft:"40px", marginTop:"81px"}} className="RightContainer">
+                        <Card style={{display:"flex", flexDirection:"column"}}>
                             <Typography variant="h4" align="center">Ingredients ({findContent(mealDetail,"strIngredient").length})</Typography>
                             <CardContent>
                                 <Box component="div"  sx={{ display:"flex", marginTop:"20px"}}>
@@ -101,11 +104,12 @@ const Recipe = () => {
                                 </Box>
                             </CardContent>
                         </Card>
-                        
-                        
-                    </div>
 
-                </div>
+                    </Box>
+                        
+                        
+                </Box>
+                    
             </Box> 
         
         )

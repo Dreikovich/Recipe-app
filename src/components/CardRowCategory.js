@@ -39,7 +39,7 @@ const CardRowCategory = ({recipes}) => {
           >  
             <Grid container spacing={2}>
               <Grid item>
-                  <Img alt="complex" src={element.strMealThumb} />
+                  <Img  alt="complex" src={element.strMealThumb} />
                 
               </Grid>
               <Grid item xs={12} sm container>

@@ -9,7 +9,7 @@ const DrawerMenu = () => {
 
   const {isClickMenu, setIsClickMenu} = useContext(AppContext)
   const itemList  = [
-    {name:"Home", onClick: () =>navigate("/", { replace: true })},
+    {name:"Home", onClick: () =>navigate("Recipe-app", { replace: true })},
     {name:"Categories", onClick: () =>navigate("/categories", { replace: true })},
     {name:"Countries", onClick: () =>navigate("/countries", { replace: true })},
     // {name:"Countries", onClick: () =>navigate("countries")},

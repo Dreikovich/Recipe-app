@@ -56,16 +56,6 @@ const Recipe = () => {
         getJoinedIngredients()
     }
 
-    const getIdFromSrc = () =>{
-        console.log(mealDetail.strYoutube.split('v=')[1])
-        
-       
-    }
-    if(mealDetail){
-        getIdFromSrc()
-    }
-    
-    
     
     
     useEffect(() =>{

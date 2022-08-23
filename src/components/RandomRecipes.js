@@ -46,7 +46,7 @@ const RandomRecipes = () => {
         <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap", gap:"25px"}}>
            {randomRecipes && randomRecipes.map((recipe) =>(
               <Box style={{display: "flex", justifyContent:"center"}}  key={recipe.idMeal} maxWidth='400px'>
-                <Card >
+                <Card sx={{cursor: "pointer", position: "relative"}} onClick={()=>onClickRecipe(recipe.idMeal)}>
                     <CardMedia 
                     component="img"
                     height="150px"
@@ -62,7 +62,7 @@ const RandomRecipes = () => {
                         <Tags recipe={recipe}></Tags>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" onClick={()=>onClickRecipe(recipe.idMeal)}>See more...</Button>
+                        <Button style={{position: 'absolute', bottom: '0px'}}  size="small" onClick={()=>onClickRecipe(recipe.idMeal)}>See more...</Button>
                     </CardActions>
                     
                 </Card>

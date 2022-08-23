@@ -67,6 +67,7 @@ const Recipe = () => {
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
                         <Box
+                            
                             component="img"
                             sx={{
                             maxHeight: 550,

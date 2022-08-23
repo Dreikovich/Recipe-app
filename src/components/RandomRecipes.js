@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect, useContext} from 'react'
 import{Box, Card, CardContent, CardMedia, Typography, CardActions, Button, Chip} from '@mui/material'
+import Tags from './Tags'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import AppContext from '../context'
@@ -30,16 +31,6 @@ const RandomRecipes = () => {
     });
     },[])
 
-    const onClickChipCategory = async (search)=>{
-        await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`).then(res=>console.log(res.data))
-        navigate(`/categories/${search}`)
-        
-    }
-
-    const onClickChipArea =(search) =>{
-        console.log(search)
-        navigate(`/countries/${search}`)
-    }
     
 
     const onClickRecipe = (id) =>{
@@ -52,10 +43,10 @@ const RandomRecipes = () => {
 
 
     return (
-        <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap"}}>
+        <div style={{display: "flex", justifyContent:"center", flexDirection: "row", flexWrap:"wrap", gap:"25px"}}>
            {randomRecipes && randomRecipes.map((recipe) =>(
-              <Box  key={recipe.idMeal} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
-                <Card>
+              <Box style={{display: "flex", justifyContent:"center"}}  key={recipe.idMeal} maxWidth='400px'>
+                <Card >
                     <CardMedia 
                     component="img"
                     height="150px"
@@ -68,20 +59,12 @@ const RandomRecipes = () => {
                         <Typography variant="body2" color="text.secondary">
                             {cutString(recipe.strInstructions, 120)}
                         </Typography>
+                        <Tags recipe={recipe}></Tags>
                     </CardContent>
                     <CardActions>
                         <Button size="small" onClick={()=>onClickRecipe(recipe.idMeal)}>See more...</Button>
                     </CardActions>
-                    <Box style={{marginLeft: "10px", display: "flex", flexWrap:"wrap"}}>
-                        <Chip onClick={()=>onClickChipCategory(recipe.strCategory)} style={{marginRight:"5px", marginBottom:"5px"}} label={recipe.strCategory}></Chip>
-                        <Chip onClick={()=>onClickChipArea(recipe.strArea)} style={{marginRight:"5px"}} label={recipe.strArea}></Chip>
                     
-                        {recipe.strTags!==null? recipe.strTags.split(",").map((element, index)=>(
-                            <Chip key={element} color="primary" variant="outlined" style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
-                        )):null
-                        }
-                        
-                    </Box> 
                 </Card>
               </Box> 
             ))

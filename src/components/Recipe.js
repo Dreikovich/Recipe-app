@@ -3,10 +3,8 @@ import {useState, useEffect, useContext} from "react"
 import RecommendedRecipe from './RecommendedRecipe'
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
 import {useParams} from 'react-router-dom'
-
-
-
 import axios from "axios"
+import Tags from './Tags'
 
 const Recipe = () => {
     
@@ -29,6 +27,25 @@ const Recipe = () => {
     //     console.log(arrayMeasures)
     // }
     // if(mealDetail){getMeasures()}
+
+    const generateKey = (pre) => {
+        return `${ pre }_${ new Date().getTime() }`;
+    }
+
+    const getJoinedIngredients = () =>{
+        let joinedIngredientsMeasure = []
+       
+        for(let i=0; i<findContent(mealDetail,"strIngredient").length;i++){
+            let ingredient = findContent(mealDetail,"strIngredient")[i]
+            let measure = findContent(mealDetail,"strMeasure")[i]
+            joinedIngredientsMeasure  = [...joinedIngredientsMeasure , {ingredient, measure}]
+        }
+        return joinedIngredientsMeasure 
+    }
+    if(mealDetail){
+        getJoinedIngredients()
+    }
+    
     
     useEffect(() =>{
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${id}`).then(res=>{
@@ -44,70 +61,62 @@ const Recipe = () => {
     return (
         (mealDetail && 
             <Box >
-                <div className="container" style={{display: 'flex', justifyContent: 'center'}}>  
-                    <div className="leftContainer" style={{width:"800px"}}>
-                        <Box sx={{ marginBottom:"10px", position:"relative"}}>
+                <Box className="container" sx={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}} >  
+                    <Box className="leftContainer" style={{display:"flex", justifyContent: 'center', flexDirection: 'column', width: '800px'}}>
+                        <Box sx={{ marginBottom:"10px", order:"0"}}>
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
                         <Box
                             component="img"
                             sx={{
-                            height: 550,
-                            width: 800,
+                            maxHeight: 550,
+                            maxWidth: '100%',
+                            
                             }}
                             alt="ImageRecipe"
                             src={mealDetail.strMealThumb}
-                            
                         />
-                          <div style={{display: "flex", flexWrap:"wrap"}}>
-                            <Chip style={{marginRight:"5px", marginBottom:"5px"}} label={mealDetail.strCategory}></Chip>
-                            <Chip style={{marginRight:"5px"}} label={mealDetail.strArea}></Chip>
-                        
-                            {mealDetail.strTags!==null? mealDetail.strTags.split(",").map((element, index)=>(
-                                <Chip key={index} color="primary" variant="outlined"  style={{marginRight:"5px", marginBottom:"10px"}} label={`#${element}`}></Chip>
-                            )):null
-                            }
-                            <br/>
-                        </div>
+                          
+                        <Box sx={{order:"0", marginBottom:"20px", marginTop:'20px'}}>
+                            <Box className="RightContainer">
+                           
+                                <Card style={{display:"flex", flexDirection:"column"}}>
+                                    <Typography  variant="h4">Ingredients ({findContent(mealDetail,"strIngredient").length})</Typography>
+                                    <CardContent>
+                                        <Box component="div"  sx={{ display:"flex", flexDirection:"column"}}>
+                                            { getJoinedIngredients().map((element, index)=>(
+                                                <Box key={index} sx={{width:"100%",display:"flex", justifyContent:"space-between"}}>
+                                                    <ListItemText style={{flexGrow: '0'}}   primary={element.ingredient} />
+                                                    <Box sx={{flex: "1 1 0", borderBottom:"1px dotted rgb(0, 0, 0)", position:"relative", top:"-10px"}}></Box>
+                                                    <ListItemText style={{flexGrow: '0'}}   primary={element.measure} />
+                                                
+                                                </Box>
+                                                
+
+                                            ))}
+                                        </Box>
+                                       
+                                    </CardContent>
+                                </Card>
+                            </Box>
+                        </Box>
                         <Box sx={{
-                            marginTop:2
+                            marginTop:2,
+                            order:"0"
                             }}>
                             <Typography variant='h4'>Descriprions</Typography>
                             <Typography>{mealDetail.strInstructions}</Typography>
                         </Box>
-                        <Box sx={{marginTop:"30px"}}>
+                        <Tags recipe={mealDetail}/>
+                        
+                        <Box sx={{marginTop:"30px", order:"2"}}>
                             <Typography variant='h4'>Related Recipes</Typography>
-                            <RecommendedRecipe mealDetail={mealDetail}/>
+                           
+                            <RecommendedRecipe mealDetail={mealDetail}/>        
                         </Box>
-                      
-                
-                    </div>
-                    <div style={{marginLeft:"40px", marginTop:"81px"}} className="RightContainer">
-                        <Card>
-                            <Typography variant="h4" align="center">Ingredients ({findContent(mealDetail,"strIngredient").length})</Typography>
-                            <CardContent>
-                                <Box component="div"  sx={{ display:"flex", marginTop:"20px"}}>
-                                    <Box>
-                                    {findContent(mealDetail,"strIngredient").map((element,index)=>(
-                                        
-                                        <ListItemText key={index} id={index} primary={element}/>
-                                    ))}
-                                    </Box>
-                                    <Box sx={{marginLeft:"50px"}} >
-                                    {findContent(mealDetail,"strMeasure").map((element,index)=>(
-                                        <ListItemText key={index} id={index} primary={element}></ListItemText>
-                                    ))}
-                                    </Box>
-                                </Box>
-                            </CardContent>
-                        </Card>
-                        
-                        
-                    </div>
-
-                </div>
+                    </Box>
+                </Box>   
             </Box> 
-        
         )
     )
 }

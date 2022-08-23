@@ -1,17 +1,27 @@
 import React from 'react'
+import YouTube from 'react-youtube';
 import {useState, useEffect, useContext} from "react"
 import RecommendedRecipe from './RecommendedRecipe'
 import { Box,  ListItemText, Typography, Card, CardContent, Chip} from '@mui/material'
 import {useParams} from 'react-router-dom'
 import axios from "axios"
 import Tags from './Tags'
+import { Construction } from '@mui/icons-material';
 
 const Recipe = () => {
+    const opts = {
+        height: '390',
+        width: '100%',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 0,
+        },
+      };
     
     const [mealDetail, setMealDetail] = useState()
     const [measure, setMeasure] = useState()
     const { id } = useParams()
-   
+    const [idUrl, setIdUrl] = useState()
 
     const findContent = (meal, search) =>{
         const arrayMeal = Object.entries(meal)
@@ -45,13 +55,27 @@ const Recipe = () => {
     if(mealDetail){
         getJoinedIngredients()
     }
+
+    const getIdFromSrc = () =>{
+        console.log(mealDetail.strYoutube.split('v=')[1])
+        
+       
+    }
+    if(mealDetail){
+        getIdFromSrc()
+    }
+    
+    
     
     
     useEffect(() =>{
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?apiKey=1&i=${id}`).then(res=>{
             const data = res.data
             const {meals} = data
+            const value = meals[0].strYoutube.split('v=')[1]
+            meals[0] = {...meals[0], idUrl:value}
             setMealDetail(meals[0])
+            
         })
         window.scrollTo(0, 0);
         
@@ -90,10 +114,7 @@ const Recipe = () => {
                                                     <ListItemText style={{flexGrow: '0'}}   primary={element.ingredient} />
                                                     <Box sx={{flex: "1 1 0", borderBottom:"1px dotted rgb(0, 0, 0)", position:"relative", top:"-10px"}}></Box>
                                                     <ListItemText style={{flexGrow: '0'}}   primary={element.measure} />
-                                                
                                                 </Box>
-                                                
-
                                             ))}
                                         </Box>
                                        
@@ -109,12 +130,16 @@ const Recipe = () => {
                             <Typography>{mealDetail.strInstructions}</Typography>
                         </Box>
                         <Tags recipe={mealDetail}/>
+                        <Box>
+                            <Typography variant='h4'>YT Video</Typography>
+                            <YouTube videoId={mealDetail.idUrl}  opts={opts}  />;
+                        </Box>
                         
                         <Box sx={{marginTop:"30px", order:"2"}}>
                             <Typography variant='h4'>Related Recipes</Typography>
-                           
                             <RecommendedRecipe mealDetail={mealDetail}/>        
                         </Box>
+                        
                     </Box>
                 </Box>   
             </Box> 

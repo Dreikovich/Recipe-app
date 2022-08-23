@@ -30,9 +30,9 @@ const Category = () => {
     // console.log(category)
 
   return (
-    <div style={{display:"flex", justifyContent:"center",flexWrap: "wrap"}}>
+    <Box sx={{display:"flex", justifyContent:"center", flexWrap: "wrap", gap:"25px"}}>
         {category && category.map(element => (
-            <Box  key={element.idCategory} maxWidth='400px'style={{marginRight:"100px", marginBottom:"50px"}}>
+            <Box  key={element.idCategory} style={{width:'400px', height:'400px'}}>
                 <Link to={`/categories/${element.strCategory}`} style={{textDecoration:"none"}}>
                     <Card >
                         <CardMedia 
@@ -55,7 +55,7 @@ const Category = () => {
             
           </Box> 
         ))}
-    </div>
+    </Box>
   )
 }
 

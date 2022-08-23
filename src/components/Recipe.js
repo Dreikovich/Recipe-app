@@ -50,16 +50,19 @@ const Recipe = () => {
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
                         <Box
+                            
                             component="img"
                             sx={{
+                            marginBottom:"10px",
                             maxHeight: 550,
                             maxWidth: '100%'
                             }}
                             alt="ImageRecipe"
                             src={mealDetail.strMealThumb}
                             
+                            
                         />
-                          <div style={{display: "flex", flexWrap:"wrap"}}>
+                          <Box sx={{display: "flex", flexWrap:"wrap", marginTop:'15px'}}>
                             <Chip style={{marginRight:"5px", marginBottom:"5px"}} label={mealDetail.strCategory}></Chip>
                             <Chip style={{marginRight:"5px"}} label={mealDetail.strArea}></Chip>
                         
@@ -68,7 +71,7 @@ const Recipe = () => {
                             )):null
                             }
                             <br/>
-                        </div>
+                        </Box>
                         <Box sx={{
                             marginTop:2
                             }}>

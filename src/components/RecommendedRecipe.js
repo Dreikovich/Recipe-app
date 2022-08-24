@@ -72,9 +72,9 @@ const RecommendedRecipe = ({mealDetail}) => {
 
     },[])
     return (
-        <Box sx={{display: 'flex',justifyContent: 'center', flexWrap:"wrap", gap:"22px",marginTop:"15px"}}>
+        <Box sx={{display: 'flex',justifyContent: 'center', flexWrap:"wrap", gap:"30px",marginTop:"15px"}}>
             {relatedReciipes && relatedReciipes.map((element, index) =>(
-                <Card key={index} sx={{ maxWidth: 240, maxHeight:420, position:"relative" }}>
+                <Card onClick={()=>onShowRecipe(element.idMeal)} key={element.strMeal} sx={{width:380, maxWidth: 440, maxHeight:420, position:"relative" ,cursor: 'pointer'}}>
                     <CardMedia
                         component="img"
                         alt="green iguana"

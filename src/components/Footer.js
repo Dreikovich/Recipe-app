@@ -8,7 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor:'#2E3B55', marginTop: '30px', color:'#FFFFFF' }}>
+    <Box sx={{ backgroundColor:'#2E3B55', marginTop: '30px', color:'#FFFFFF', height:"220px"}}>
       <Container maxWidth="lg" >
         <Grid container spacing={1}  direction="row" justifyContent="center"   >
           <Grid item xs={6} sm={6} md={6}  >

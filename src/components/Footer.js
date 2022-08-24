@@ -11,7 +11,7 @@ const Footer = () => {
     <Box sx={{ backgroundColor:'#2E3B55', marginTop: '30px', color:'#FFFFFF' }}>
       <Container maxWidth="lg" >
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={6}>
             <Box sx={{borderBottom:"1px solid #FFFFFF"}}>Contact</Box>
             <Box sx={{marginTop: '15px', display: 'flex'}}>
               <EmailIcon/>
@@ -38,7 +38,7 @@ const Footer = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={6}>
             <Box sx={{borderBottom:"1px solid #FFFFFF"}}>The site was created using</Box>
             <Box sx={{marginTop: '15px', display: 'flex', flexDirection: 'column'}}>
               <Typography style={{marginTop: '3px'}}>React </Typography>

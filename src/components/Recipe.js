@@ -77,7 +77,7 @@ const Recipe = () => {
             <Box >
                 <Box className="container" sx={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}} >  
                     <Box className="leftContainer" style={{display:"flex", justifyContent: 'center', flexDirection: 'column', width: '800px'}}>
-                        <Box sx={{ marginBottom:"10px", order:"0"}}>
+                        <Box sx={{ marginBottom:"10px", order:"0", order:"0"}}>
                             <Typography variant="h2" >{mealDetail.strMeal}</Typography>
                         </Box>
                         <Box
@@ -86,6 +86,7 @@ const Recipe = () => {
                             sx={{
                             maxHeight: 550,
                             maxWidth: '100%',
+                            ,
                             
                             }}
                             alt="ImageRecipe"
@@ -116,6 +117,7 @@ const Recipe = () => {
                         </Box>
                         <Box sx={{
                             marginTop:2,
+                            order:"0",
                             order:"0"
                             }}>
                             <Typography variant='h4'>Descriprions</Typography>

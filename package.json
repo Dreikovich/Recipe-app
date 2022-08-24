@@ -64,8 +64,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/drewkevich/Recipe-app/issues"
-  },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
   }
 }

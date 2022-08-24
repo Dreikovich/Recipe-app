@@ -7,6 +7,7 @@ import Categories from './pages/Categories'
 import Recipe from "./components/Recipe"
 import ListRecipesByCategory from './components/ListRecipesByCategory'
 import ListRecipesByCountries from './components/ListRecipesByCountry'
+import Footer from './components/Footer'
 import SearchResults from './components/SearchResults'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Countries from './pages/Countries';
@@ -37,6 +38,7 @@ function App() {
 
             
           </Routes>
+          <Footer />
           
         </div>
       </Router>

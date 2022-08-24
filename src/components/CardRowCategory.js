@@ -28,14 +28,16 @@ const CardRowCategory = ({recipes}) => {
     return (
     <Box>
       {recipes && recipes.map(element =>(  
-          <Paper  key={element.idMeal}
+          <Paper  key={element.idMeal }
             sx={{
               p: 2,
               margin: 'auto',
               maxWidth: 800,
               flexGrow: 1,
-              marginBottom: '20px'
+              marginBottom: '20px',
+              cursor: 'pointer'
             }}
+            onClick={()=>onShowRecipe(element.idMeal)}
           >  
             <Grid container spacing={2}>
               <Grid item>

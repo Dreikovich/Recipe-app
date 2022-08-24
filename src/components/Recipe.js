@@ -100,11 +100,13 @@ const Recipe = () => {
                                     <CardContent>
                                         <Box component="div"  sx={{ display:"flex", flexDirection:"column"}}>
                                             { getJoinedIngredients().map((element, index)=>(
+                                                element.ingredient!=null?
                                                 <Box key={index} sx={{width:"100%",display:"flex", justifyContent:"space-between"}}>
-                                                    <ListItemText style={{flexGrow: '0'}}   primary={element.ingredient} />
-                                                    <Box sx={{flex: "1 1 0", borderBottom:"1px dotted rgb(0, 0, 0)", position:"relative", top:"-10px"}}></Box>
-                                                    <ListItemText style={{flexGrow: '0'}}   primary={element.measure} />
-                                                </Box>
+                                                <ListItemText style={{flexGrow: '0'}}   primary={element.ingredient} />
+                                                <Box sx={{flex: "1 1 0", borderBottom:"1px dotted rgb(0, 0, 0)", position:"relative", top:"-10px"}}></Box>
+                                                <ListItemText style={{flexGrow: '0'}}   primary={element.measure} />
+                                            </Box>:null
+                                                
                                             ))}
                                         </Box>
                                        

@@ -13,8 +13,8 @@ const Header = () => {
   const {setIsClickMenu} = useContext(AppContext)
 
   return (
-    <Box style={{marginBottom: '50px'}}>
-        <AppBar position="static" style={{ background: '#2E3B55' }}>
+    <Box style={{marginBottom: '70px'}}>
+        <AppBar component="nav" style={{ background: '#2E3B55' }}>
         <Toolbar>
           <IconButton
             size="large"
